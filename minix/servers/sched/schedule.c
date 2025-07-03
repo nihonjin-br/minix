@@ -13,6 +13,8 @@
 #include <minix/com.h>
 #include <machine/archtypes.h>
 
+int algoritmo_escalonamento = 1; // 1 = padrão, 2 = RR, 3 = IO-prioridade, 4 = FCFS
+
 static unsigned balance_timeout;
 
 #define BALANCE_TIMEOUT	5 /* how often to balance queues in seconds */
