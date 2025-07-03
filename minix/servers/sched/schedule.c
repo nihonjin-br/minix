@@ -303,10 +303,42 @@ static int schedule_process(struct schedproc * rmp, unsigned flags)
 
 	pick_cpu(rmp);
 
-	if (flags & SCHEDULE_CHANGE_PRIO)
-		new_prio = rmp->priority;
-	else
-		new_prio = -1;
+	if (flags & SCHEDULE_CHANGE_PRIO) {
+    switch (algoritmo_escalonamento) {
+        case 1: // Algoritmo padrão
+            new_prio = rmp->priority;
+            break;
+
+        case 2: // Round-Robin puro
+            new_prio = USER_Q;
+            break;
+
+        case 3: // Prioridade IO-bound
+            if (rmp->user_time < 5)  // pouco uso de CPU = IO-bound
+                new_prio = MAX_USER_Q + 1; // prioridade alta
+            else
+                new_prio = USER_Q;
+            break;
+
+        case 4: // FCFS (sem preempção)
+            new_prio = MIN_USER_Q; // menor prioridade (não preempta)
+            rmp->priority = new_prio;
+            rmp->max_priority = new_prio;
+            break;
+
+        default:
+            new_prio = rmp->priority;
+    }
+
+    // Garante que a prioridade esteja dentro dos limites válidos
+    if (new_prio < MAX_USER_Q) new_prio = MAX_USER_Q;
+    if (new_prio > MIN_USER_Q) new_prio = MIN_USER_Q;
+
+    rmp->priority = new_prio;
+    rmp->max_priority = new_prio;
+} else {
+    new_prio = -1;
+}
 
 	if (flags & SCHEDULE_CHANGE_QUANTUM)
 		new_quantum = rmp->time_slice;
