@@ -6,5 +6,5 @@ Aluno : Raphael Kenichi Lopes Katayama
 
 Email Institucional : raphael.katayama@unifesp.br
 
-Prof. Dr. Joahannes Bruno Dias da Costa
+Professor responsável : Prof. Dr. Joahannes Bruno Dias da Costa
 
