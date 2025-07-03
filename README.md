@@ -2,7 +2,7 @@
 
 Aluno : Raphael Kenichi Lopes Katayama 
 
-Email : raphael.katayama @unifesp.br
+Email : raphael.katayama@unifesp.br
 
 Prof. Dr. Joahannes Bruno Dias da Costa
 
